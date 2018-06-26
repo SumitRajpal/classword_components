@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
         name=(EditText)findViewById(R.id.userName);
         phone=(EditText)findViewById(R.id.userPhone);
         birth=(EditText)findViewById(R.id.userDob);
-        
+
         imageview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
 
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(true){
+                if(isChecked){
                     next.setEnabled(false);
                 }else{
                     next.setEnabled(false);
@@ -124,13 +124,13 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
 
 
     public void onTimeSet(RadialPickerLayout view, int hourOfDay, int minute, int second) {
-        String time = "You picked the following time: "+hourOfDay+"h"+minute+"m"+second;
+        String time = ""+hourOfDay+"h"+minute+"m"+second;
         birth.setText(time);
     }
 
     @Override
     public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
-        String date = "You picked the following date: "+dayOfMonth+"/"+(monthOfYear+1)+"/"+year;
+        String date = ""+dayOfMonth+"/"+(monthOfYear+1)+"/"+year;
         birth.setText(date);
     }
 
