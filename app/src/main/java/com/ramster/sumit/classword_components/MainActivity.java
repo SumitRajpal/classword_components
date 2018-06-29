@@ -1,5 +1,6 @@
 package com.ramster.sumit.classword_components;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,7 +13,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Switch;
+import android.widget.Toast;
 
+import com.valdesekamdem.library.mdtoast.MDToast;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 import com.wdullaer.materialdatetimepicker.time.RadialPickerLayout;
 
@@ -24,7 +27,7 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
     String b[]={"Bangalore","Khola","Domlur"};
     String u[]={"LUCKNOW","KANPUR","FAIZABAD"};
     Spinner s,s1,s2;Button next;
-    Switch aSwitch;EditText name,phone,birth;
+    Switch aSwitch;EditText name,phone,birth,address;
     ImageView imageview; DatePickerDialog dpd;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +41,7 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
         name=(EditText)findViewById(R.id.userName);
         phone=(EditText)findViewById(R.id.userPhone);
         birth=(EditText)findViewById(R.id.userDob);
+        address=(EditText)findViewById(R.id.address);
 
         imageview.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,6 +59,38 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String state = s.getSelectedItem().toString();
+                String city = s.getSelectedItem().toString();
+                if(name.length()==0 || phone.length()==0 || birth.length()==0 || address.length()==0){
+                    MDToast mdToast = MDToast.makeText(getApplicationContext(), "Field cannot be Empty", 2000, MDToast.TYPE_ERROR);
+                    mdToast.show();
+                }else {
+                    //Toast.makeText(getApplicationContext(),name.getText()+"--"+phone.getText()+"--"+birth.getText()+"--"+city,Toast.LENGTH_SHORT).show();
+                    MDToast mdToast = MDToast.makeText(getApplicationContext(), "Meetup Created", 2000, MDToast.TYPE_SUCCESS);
+                    mdToast.show();
+                    Thread background = new Thread() {
+                        public void run() {
+
+                            try {
+
+                                sleep(5000);
+
+
+                                Intent intent = new Intent(getApplicationContext(), Main3Activity.class);
+                                intent.putExtra("name",name.getText().toString());
+                                startActivity(intent);
+
+                                finish();
+
+                            } catch (Exception e) {
+
+                            }
+                        }
+                    };
+
+                    // start thread
+                    background.start();
+                }
 
 
             }

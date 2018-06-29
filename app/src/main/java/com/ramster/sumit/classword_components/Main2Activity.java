@@ -17,7 +17,7 @@ public class Main2Activity extends AppCompatActivity {
 
                 try {
 
-                    sleep(3000);
+                    sleep(5000);
 
 
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
